@@ -2,28 +2,35 @@ import React from 'react'
 import { useState } from 'react'
 import './InputText.css'
 function InputText(props) {
-	const [name, setName] = useState('')
-	const [age, setAge] = useState('')
-	const [carName, setCarName] = useState('')
+	const [userInput, setUserInput] = useState({
+		name: '',
+		age: '',
+		carName: '',
+	})
 
 	const nameChangeHandler = (e) => {
-		setName(e.target.value)
+		setUserInput({
+			...userInput,
+			name: e.target.value,
+		})
 	}
 
 	const ageChangeHandler = (e) => {
-		setAge(e.target.value)
+		setUserInput({
+			...userInput,
+			age: e.target.value,
+		})
 	}
 	const carNameChangeHandler = (e) => {
-		setCarName(e.target.value)
+		setUserInput({
+			...userInput,
+			carName: e.target.value,
+		})
 	}
 	const submitHandler = (event) => {
 		event.preventDefault()
-		const textData = {
-			name: name,
-			age: age,
-			carName: carName,
-		}
-		props.onSaveDataHandler(textData)
+
+		props.onSaveDataHandler(userInput)
 	}
 	return (
 		<form onSubmit={submitHandler}>
